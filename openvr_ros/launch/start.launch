@@ -1,0 +1,21 @@
+<launch>
+
+  <arg name="rviz"  default="true" />
+  
+  <!-- <include file="$(find hands_deploy)/launch/hand.launch" if="$(arg hand)">
+    <arg name="port" value="/dev/ttyACM1"/>
+    <arg name="cli"  value="$(arg hand_cli)"/>
+  </include> -->
+  <node pkg="openvr_ros"  type="track_publisher_node" name="track_publisher" output="screen" respawn="true" />
+  <node pkg="openvr_ros"  type="tracked2tf.py" name="tracked2tf_node" output="screen" respawn="true">
+    <param name="pose_topic" value="/track_publisher/tracked_device_pose" />
+  </node>
+
+  <group if="$(arg rviz)">
+    <!-- There should exist at least one joint to prevent reporting an "slider" error -->
+    <param name="use_gui" value="true" />
+    <node name="rviz" pkg="rviz" type="rviz" respawn="false" args="-d $(find openvr_ros)/config/settings.rviz" output="screen"/>
+    <!-- args="-f world_frame"   -f world_frame     |     required="true" -->
+  </group>
+
+</launch>

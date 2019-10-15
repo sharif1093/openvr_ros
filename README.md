@@ -1,2 +1,47 @@
-# vive_ros
-A package that connects to steamvr through openvr and provides tracking information for HTC Vive devices in ROS.
+# openvr_ros
+
+This package connects to [SteamVR](https://store.steampowered.com/steamvr) through [OpenVR](https://github.com/ValveSoftware/openvr) SDK and publishes tracking information of all connected devices (i.e. headsets, controllers, and trackers) to ROS.
+
+This package is tested with `Ubuntu 16.04`, `ROS Kinetic`, and `HTC Vive`.
+
+## Installation
+
+* Install [Steam](https://store.steampowered.com/about/), create an account if you don't have one and connect to it.
+* Find SteamVR on the Steam store and install it.
+* Install [OpenVR](https://github.com/ValveSoftware/openvr):
+
+```bash
+git clone https://github.com/ValveSoftware/openvr.git
+cd openvr
+mkdir build && cd build
+cmake ..
+make
+sudo make install
+```
+
+* Clone the `openvr_ros` package into your catkin workspace.
+
+```bash
+cd <path_to_your_catkin_workspace>
+catkin_make
+```
+
+## Usage
+
+* Connect your VR device.
+* Run SteamVR, calibrate the device.
+* Run the tracker:
+
+```bash
+source <path_to_your_catkin_workspace>/devel/setup.bash
+
+roslaunch openvr_ros start.launch
+```
+
+## Issues
+Please file issues under the [issues tab](https://github.com/sharif1093/openvr_ros/issues).
+
+## References
+
+* A great tutorial on using OpenVR: https://github.com/osudrl/CassieVrControls/wiki/OpenVR-Quick-Start
+* OpenVR wiki: https://github.com/ValveSoftware/openvr/wiki
