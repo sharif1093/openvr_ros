@@ -38,6 +38,12 @@ source <path_to_your_catkin_workspace>/devel/setup.bash
 roslaunch openvr_ros start.launch
 ```
 
+## TODO
+
+- [X] Publish all tracking information for the headset, controllers, and trackers.
+- [ ] Publish controller states as well.
+- [ ] Add 3d models of the headset and controllers/trackers to the rviz visualization.
+
 ## Issues
 Please file issues under the [issues tab](https://github.com/sharif1093/openvr_ros/issues).
 
