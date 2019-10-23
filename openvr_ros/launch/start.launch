@@ -11,6 +11,9 @@
     <param name="pose_topic" value="/track_publisher/tracked_device_pose" />
   </node>
 
+  
+  <node pkg="tf2_ros" type="static_transform_publisher" name="tracker_link_broadcaster" args="0 0 0  0 0 1.570796327 world tracker_link" />
+
   <group if="$(arg rviz)">
     <!-- There should exist at least one joint to prevent reporting an "slider" error -->
     <param name="use_gui" value="true" />

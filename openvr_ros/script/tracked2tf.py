@@ -44,7 +44,7 @@ class Tracked2TF:
         frame_child = self.register(data.device_header.ID, data.device_header.Class)
 
         tf_msg.header.stamp = data.header.stamp
-        tf_msg.header.frame_id = "world"
+        tf_msg.header.frame_id = "tracker_link"
         tf_msg.child_frame_id = frame_child
         tf_msg.transform.translation = data.pose.position
         tf_msg.transform.rotation = data.pose.orientation
