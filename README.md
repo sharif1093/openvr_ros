@@ -4,7 +4,9 @@ This package connects to [SteamVR](https://store.steampowered.com/steamvr) throu
 
 This package is tested with `Ubuntu 16.04`, `ROS Kinetic`, and `HTC Vive`.
 
-<img src="./doc/rviz.gif" width="800">
+<p align="center">
+  <img src="./doc/rviz.gif" width="640">
+</p>
 
 ## Installation
 
