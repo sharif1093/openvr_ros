@@ -12,7 +12,7 @@ from geometry_msgs.msg import TransformStamped
 
 class Tracked2TF:
     def __init__(self, pose_topic):
-        rospy.Subscriber(pose_topic, TrackedDevicePose, self.callback, queue_size=1200)
+        rospy.Subscriber(pose_topic, TrackedDevicePose, self.callback, queue_size=300)
         self.br = tf2_ros.TransformBroadcaster()
 
         # We assign the roles ourselves
@@ -28,9 +28,10 @@ class Tracked2TF:
         if not ID in self.name:
             self.count[Class] += 1
             if Class == 1:
-                self.name[ID] = self.class_names[Class]
+                self.name[ID] = "vr_" + self.class_names[Class]
             else:
-                self.name[ID] = self.class_names[Class] + "." + self.role_names[self.count[Class]%2]
+                self.name[ID] = "vr_" + self.class_names[Class] + "_" + self.role_names[self.count[Class]%2]
+            rospy.logwarn("Just registered an {} with name: {}".format(ID, self.name[ID]))
         return self.name[ID]
 
     def callback(self, data):
@@ -44,7 +45,7 @@ class Tracked2TF:
         frame_child = self.register(data.device_header.ID, data.device_header.Class)
 
         tf_msg.header.stamp = data.header.stamp
-        tf_msg.header.frame_id = "tracker_link"
+        tf_msg.header.frame_id = "vr_link"
         tf_msg.child_frame_id = frame_child
         tf_msg.transform.translation = data.pose.position
         tf_msg.transform.rotation = data.pose.orientation
