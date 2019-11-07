@@ -8,12 +8,13 @@ This package is tested with `Ubuntu 16.04`, `ROS Kinetic`, and `HTC Vive`.
   <img src="./doc/rviz.gif" width="640">
 </p>
 
-And calibration of frame origins and cad sizes:
+For calibration of frame origins and CAD model sizes please watch:
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=mAlpZEBwjqs
-" target="_blank"><img src="http://img.youtube.com/vi/mAlpZEBwjqs/0.jpg" 
-alt="Calibration of HTC Vive ROS interface with a point cloud sensor" width="240" height="180" border="10" /></a>
-
+<p align="center">
+  <a href="http://www.youtube.com/watch?feature=player_embedded&v=mAlpZEBwjqs
+  " target="_blank"><img src="http://img.youtube.com/vi/mAlpZEBwjqs/0.jpg" 
+  alt="Calibration of HTC Vive ROS interface with a point cloud sensor" width="640" height="480" border="10" /></a>
+</p>
 
 ## Installation
 
