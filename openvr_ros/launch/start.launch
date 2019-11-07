@@ -1,24 +1,16 @@
 <launch>
+  <arg name="rviz" default="true" />
+  <arg name="tf_conversion" default="true" />
 
-  <arg name="rviz"  default="true" />
-  
-  <!-- <include file="$(find hands_deploy)/launch/hand.launch" if="$(arg hand)">
-    <arg name="port" value="/dev/ttyACM1"/>
-    <arg name="cli"  value="$(arg hand_cli)"/>
-  </include> -->
-  <node pkg="openvr_ros"  type="track_publisher_node" name="track_publisher" output="screen" respawn="true" />
-  <node pkg="openvr_ros"  type="tracked2tf.py" name="tracked2tf_node" output="screen" respawn="true">
+  <node pkg="openvr_ros" type="track_publisher_node" name="track_publisher" output="screen" required="true" />
+  <node pkg="openvr_ros" type="tracked2tf.py" name="tracked2tf_node" output="screen" required="true" if="$(arg tf_conversion)">
     <param name="pose_topic" value="/track_publisher/tracked_device_pose" />
   </node>
 
-  
-  <node pkg="tf2_ros" type="static_transform_publisher" name="tracker_link_broadcaster" args="0 0 0  0 0 1.570796327 world tracker_link" />
-
-  <group if="$(arg rviz)">
-    <!-- There should exist at least one joint to prevent reporting an "slider" error -->
-    <param name="use_gui" value="true" />
-    <node name="rviz" pkg="rviz" type="rviz" respawn="false" args="-d $(find openvr_ros)/config/settings.rviz" output="screen"/>
-    <!-- args="-f world_frame"   -f world_frame     |     required="true" -->
-  </group>
-
+  <include file="$(find digiexp_description)/launch/load_model.launch" if="$(arg rviz)">
+    <arg name="model" value="$(find openvr_ros)/model/environment.urdf.xacro" />
+    <arg name="rviz" value="true" />
+    <arg name="gui" value="false" />
+    <arg name="rvizconfig" value="$(find openvr_ros)/config/settings.rviz" />
+  </include>
 </launch>

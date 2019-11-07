@@ -1,0 +1,19 @@
+<launch>
+    <arg name="model" default="" />
+    <arg name="rviz" default="false" />
+    <arg name="gui" default="false" />
+    <arg name="rvizconfig" default="" />
+
+    <!-- <param name="robot_description" textfile="$(arg model)" /> -->
+    <param name="robot_description" command="xacro --inorder $(arg model)" />
+
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+
+    <group if="$(arg rviz)">
+        <!-- There should exist at least one joint to prevent reporting an "slider" error -->
+        <param name="use_gui" value="$(arg gui)" />
+        <node name="rviz" pkg="rviz" type="rviz" respawn="false" required="true" args="-d $(arg rvizconfig)" output="screen"/>
+        <!-- args="-f world_frame"   -f world_frame     |     required="true" -->
+    </group>
+</launch>
