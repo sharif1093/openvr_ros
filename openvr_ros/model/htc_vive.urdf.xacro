@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+	<!--
+		HTC Vive Model V1.0
+		Maintainer: Mohammadreza Sharif
+		Email: mrsharif@ece.neu.edu
+	-->
+
+	<xacro:property name="pi" value="3.1415926535897931" />
+	<xacro:include filename="$(find openvr_ros)/model/materials.urdf.xacro"/>
+
+
+	<!-- TODO: Remove it after debugging -->
+	<xacro:include filename="$(find digiexp_description)/model/spherical_joint.urdf.xacro"/>
+
+
+
+	<xacro:macro name="htc_element" params="parent name type body_position_offset body_orientation_offset  position_offset orientation_offset  joint_type scale color">
+		
+		<!-- <joint name="${name}_${parent}_joint" type="${joint_type}">
+			<parent link="${parent}"/>
+			<child link="${name}"/>
+		</joint>
+		<link name="${name}" />
+		<xacro:spherical_joint name="${name}_${parent}_connection" parent="${name}" child="${name}_connection" />
+		<link name="${name}_connection">
+			<visual>
+				<origin rpy="${body_orientation_offset}" xyz="${body_position_offset}"/>
+				<geometry>
+					<mesh filename="package://openvr_ros/meshes/${type}.stl" scale="${scale} ${scale} ${scale}"/>
+				</geometry>
+				<material name="${color}"/>
+			</visual>
+		</link> -->
+
+		<joint name="${name}_${parent}_joint" type="${joint_type}">
+			<parent link="${parent}"/>
+			<child link="${name}"/>
+		</joint>
+		<link name="${name}" />
+
+		<joint name="${name}_body_${parent}_joint" type="fixed">
+			<parent link="${name}"/>
+			<child link="${name}_body"/>
+			<origin xyz="${position_offset}" rpy="${orientation_offset}" />
+		</joint>
+
+		<link name="${name}_body">
+			<visual>
+				<origin rpy="${body_orientation_offset}" xyz="${body_position_offset}"/>
+				<geometry>
+					<mesh filename="package://openvr_ros/meshes/${type}.stl" scale="${scale} ${scale} ${scale}"/>
+				</geometry>
+				<material name="${color}"/>
+			</visual>
+		</link>
+		
+	</xacro:macro>
+
+
+	<!-- <xacro:if value="${left}"> -->
+	<xacro:macro name="tracker" params="parent joint_type id">
+		<xacro:htc_element parent="${parent}" name="vr_tracker_${id}" type="tracker" body_position_offset="0 -0.04 -0.055" body_orientation_offset="0 0 0" position_offset="0 0 0" orientation_offset="${pi} 0 0" joint_type="${joint_type}" scale="0.001" color="HTC/Black" />
+	</xacro:macro>
+
+	<xacro:macro name="controller" params="parent joint_type id"> <!-- 0 -0.072 0.042 -->
+		<xacro:htc_element parent="${parent}" name="vr_controller_${id}" type="controller" body_position_offset="0 -0.055 0.01" body_orientation_offset="0 ${pi} 0" position_offset="0 0 0" orientation_offset="${-pi/2} 0 0" joint_type="${joint_type}" scale="0.001" color="HTC/LightBlue" />
+	</xacro:macro>
+
+	<xacro:macro name="hmd" params="parent joint_type">
+		<xacro:htc_element parent="${parent}" name="vr_hmd" type="hmd" body_position_offset="0 0 0" body_orientation_offset="${-pi/2} ${pi} 0" position_offset="0 0 0" orientation_offset="${-pi/2} 0 0" joint_type="${joint_type}" scale="0.001" color="HTC/Green" />
+	</xacro:macro>
+
+
+	<xacro:macro name="htc">
+		<link name="vr_world" />
+		<link name="vr_link" />
+		<joint name="vr_world_vr_link_joint" type="fixed">
+			<parent link="vr_world"/>
+			<child link="vr_link"/>
+			<origin rpy="${pi/2} 0 0" xyz="0 0 0"/>
+		</joint>
+
+		<!-- joint_type = fixed | floating -->
+		<xacro:hmd parent="vr_link" joint_type="floating" />
+		<xacro:tracker parent="vr_link" id="left" joint_type="floating" />
+		<xacro:tracker parent="vr_link" id="right" joint_type="floating" />
+		<xacro:controller parent="vr_link" id="left" joint_type="floating" />
+		<xacro:controller parent="vr_link" id="right" joint_type="floating" />
+	</xacro:macro>
+
+</robot>

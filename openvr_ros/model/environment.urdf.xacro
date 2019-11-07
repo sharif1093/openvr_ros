@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<robot name="openvr_env" 
+  xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find openvr_ros)/model/htc_vive.urdf.xacro"/>
+  <xacro:htc />
+</robot>

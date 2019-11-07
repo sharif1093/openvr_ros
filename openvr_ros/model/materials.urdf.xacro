@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<robot>
+
+	<material name="HTC/Red">
+		<color rgba="1.0 0.0 0.0 1.0"/>
+	</material>
+
+	<material name="HTC/Green">
+		<color rgba="0.0 1 0.0 0.9"/>
+	</material>
+
+	<material name="HTC/DarkGolden">
+		<color rgba="0.4 0.4 0.3 1.0"/>
+	</material>
+
+	<material name="HTC/Blue">
+		<color rgba="0.0 0.0 0.8 0.9"/>
+	</material>
+
+	<material name="HTC/LightBlue">
+		<color rgba="0.0 0.4 1.0 0.9"/>
+	</material>
+
+	<material name="HTC/LightGrey">
+		<color rgba="0.7 0.7 0.7 1.0"/>
+	</material>
+
+	<material name="HTC/DarkGrey">
+		<color rgba="0.4 0.4 0.4 1.0"/>
+	</material>
+
+	<material name="HTC/Black">
+		<color rgba="0.0 0.0 0.0 0.9"/>
+	</material>
+</robot>
