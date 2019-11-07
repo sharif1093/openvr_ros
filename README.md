@@ -10,8 +10,24 @@ This package is tested with `Ubuntu 16.04`, `ROS Kinetic`, and `HTC Vive`.
 
 ## Installation
 
-* Install [Steam](https://store.steampowered.com/about/), create an account if you don't have one and connect to it.
-* Find SteamVR on the Steam store and install it.
+* Install [SteamCMD](https://developer.valvesoftware.com/wiki/SteamCMD). For the list of commands for SteamCMD see: [Command_Line_Options](https://developer.valvesoftware.com/wiki/Command_Line_Options).
+
+* Install SteamVR by the following command:
+
+```bash
+# AppID of SteamVR on Steam store is 250820: https://steamdb.info/app/250820/
+steamcmd +login anonymous +app_update 250820 +quit
+```
+
+* Install [udev.rules](https://raw.githubusercontent.com/ValveSoftware/steam-devices/master/60-steam-vr.rules). See [usb device requirements](https://github.com/ValveSoftware/SteamVR-for-Linux/blob/master/README.md#usb-device-requirements) for more details.
+
+```bash
+cd
+wget https://raw.githubusercontent.com/ValveSoftware/steam-devices/master/60-steam-vr.rules
+sudo mv 60-steam-vr.rules /etc/udev/rules.d/
+sudo udevadm control --reload && sudo udevadm trigger
+```
+
 * Install [OpenVR](https://github.com/ValveSoftware/openvr):
 
 ```bash
@@ -33,7 +49,13 @@ catkin_make
 ## Usage
 
 * Connect your VR device.
-* Run SteamVR, calibrate the device.
+* Run SteamVR, then calibrate the device:
+
+```bash
+cd ~/.steam/SteamApps/common/SteamVR/bin
+STEAM_RUNTIME=0 ./vrstartup.sh >> /dev/null 2>&1
+```
+
 * Run the tracker:
 
 ```bash
