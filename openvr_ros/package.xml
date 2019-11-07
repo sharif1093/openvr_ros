@@ -4,7 +4,7 @@
   <version>0.1.0</version>
   <description>A package that connects to SteamVR through OpenVR and provides tracking information for VR devices in ROS.</description>
 
-  <maintainer email="sharif1093@gmail.com">Mohammadreza Sharif</maintainer>
+  <maintainer email="mrsharif@ece.neu.edu">Mohammadreza Sharif</maintainer>
   <author>Mohammadreza Sharif</author>
   <license>MIT</license>
 
