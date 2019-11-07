@@ -75,9 +75,10 @@ roslaunch openvr_ros start.launch
 ## TODO
 
 - [X] Publish all tracking information for the headset, controllers, and trackers.
+- [X] Add 3D models of the headset and controllers/trackers to the rviz visualization.
 - [ ] Publish controller states.
 - [ ] Publish events, e.g. button press, device connections, standby, etc.
-- [ ] Add 3d models of the headset and controllers/trackers to the rviz visualization.
+
 
 ## Issues
 Please file issues under the [issues tab](https://github.com/sharif1093/openvr_ros/issues).
